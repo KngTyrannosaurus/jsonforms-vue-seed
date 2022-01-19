@@ -1,15 +1,16 @@
 <template>
   <h1>Darkhorse Studios JSON Editor</h1>
   <div class="myform">
- <input type="file" id="myFile" name="filename">
+ <input type="file" ref="file" @change="fileToSchema(evt)" />
+ <button @click="testUpdateSchema()">Test update the schema</button>
     <json-forms
       :data="data"
       :renderers="renderers"
-      :schema="schema"
+      :schema="mySchema"
       :uischema="uischema"
       @change="onChange"
     />
-    <button> Download Filled Schema</button>
+    <button @click="downloadData()"> Download Filled Schema</button>
   </div>
 </template>
 
@@ -127,13 +128,45 @@ export default defineComponent({
         recurrence: "Daily",
         rating: 3,
       },
+
       schema,
       uischema,
+      mySchema: {}
     };
   },
   methods: {
+   
+  fileToSchema(file: File){
+    const fileReader = new FileReader()
+    fileReader.onload = function ( evt ) { console.log(evt) };
+    fileReader.readAsText( file );
+  },
+    testUpdateSchema(){
+  this.mySchema = {properties:{name:{type: "string", minLength: 1, description: "Blah blah blah"}}}
+    },
+    downloadData(){
+      const data = JSON.stringify(this.data)
+      const filename = 'JSONData.json'
+     const blob = new Blob([data], { type: 'text/plain;charset=utf-8;' })
+  if (navigator.msSaveBlob) { // IE 10+
+    navigator.msSaveBlob(blob, filename)
+  } else {
+    const link = document.createElement('a')
+    if (link.download !== undefined) { // feature detection
+      // Browsers that support HTML5 download attribute
+      const url = URL.createObjectURL(blob)
+      link.setAttribute('href', url)
+      link.setAttribute('download', filename)
+      link.style.visibility = 'hidden'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+  }
+    },
     onChange(event: JsonFormsChangeEvent) {
       this.data = event.data;
+      
     },
   },
   provide() {
