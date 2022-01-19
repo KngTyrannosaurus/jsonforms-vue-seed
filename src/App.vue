@@ -2,6 +2,7 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <h1>JSON Forms Vue 3</h1>
   <div class="myform">
+ <input type="file" id="myFile" name="filename">
     <json-forms
       :data="data"
       :renderers="renderers"
@@ -9,6 +10,7 @@
       :uischema="uischema"
       @change="onChange"
     />
+    <button> Download Filled Schema</button>
   </div>
 </template>
 
