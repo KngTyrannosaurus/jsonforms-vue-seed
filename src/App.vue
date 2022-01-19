@@ -1,6 +1,5 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <h1>JSON Forms Vue 3</h1>
+  <h1>Darkhorse Studios JSON Editor</h1>
   <div class="myform">
  <input type="file" id="myFile" name="filename">
     <json-forms
