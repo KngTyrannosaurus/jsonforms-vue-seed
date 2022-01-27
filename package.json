@@ -1,11 +1,16 @@
 {
+  
+    "main": "main.js",
+  
+  
   "name": "jsonforms-vue-seed",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "electron:dev": "vue-cli-service build && electron ."
   },
   "dependencies": {
     "@jsonforms/core": "^2.5.1",
@@ -23,6 +28,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "electron": "^16.0.7",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
     "typescript": "~3.9.3"
